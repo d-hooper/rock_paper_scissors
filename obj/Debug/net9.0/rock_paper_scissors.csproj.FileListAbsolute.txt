@@ -12,3 +12,4 @@ C:\Users\dalli\Codeworks\week09\rock_paper_scissors\obj\Debug\net9.0\refint\rock
 C:\Users\dalli\Codeworks\week09\rock_paper_scissors\obj\Debug\net9.0\rock_paper_scissors.pdb
 C:\Users\dalli\Codeworks\week09\rock_paper_scissors\obj\Debug\net9.0\rock_paper_scissors.genruntimeconfig.cache
 C:\Users\dalli\Codeworks\week09\rock_paper_scissors\obj\Debug\net9.0\ref\rock_paper_scissors.dll
+C:\Users\dalli\Codeworks\week09\rock_paper_scissors\obj\Debug\net9.0\rock_paper_scissors.sourcelink.json
