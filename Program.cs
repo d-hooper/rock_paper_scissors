@@ -1,6 +1,9 @@
 ﻿internal class Program
 {
-  private static void Main(string[] args)
+
+  static int PlayerWins = 0;
+  static int ComputerWins = 0;
+  private static void Main()
   {
     Console.Clear();
     Console.WriteLine("Rock Paper Scissors");
@@ -8,7 +11,6 @@
     string userHand = ChooseHand();
     Console.WriteLine();
     string computerHand = GetComputerHand();
-    Console.WriteLine();
     Console.WriteLine($"You chose {userHand}.");
     Console.WriteLine();
     Console.WriteLine($"The computer chose {computerHand}.");
@@ -17,18 +19,25 @@
     {
       Console.WriteLine("It's a tie.");
     }
-    if ((userHand == "rock" && computerHand == "paper") || (userHand == "paper" && computerHand == "scissors") || (userHand == "scissors" && computerHand == "rock"))
+    else if ((userHand == "rock" && computerHand == "paper") || (userHand == "paper" && computerHand == "scissors") || (userHand == "scissors" && computerHand == "rock"))
     {
+      Console.ForegroundColor = ConsoleColor.Cyan;
       Console.WriteLine("The computer wins...");
-      return;
+      ComputerWins++;
+      Console.ResetColor();
     }
     else
     {
+      Console.ForegroundColor = ConsoleColor.Cyan;
       Console.WriteLine("You win!");
+      PlayerWins++;
+      Console.ResetColor();
     }
+
+    Console.WriteLine();
+    Console.WriteLine($"Score Tally: You - {PlayerWins} | Computer - {ComputerWins}");
+    Replay();
   }
-
-
 
   static string ChooseHand()
   {
@@ -73,5 +82,23 @@
       default:
         throw new Exception("No hand shape was selected by the computer.");
     }
+  }
+
+  static void Replay()
+  {
+    Console.WriteLine();
+    Console.WriteLine("Would you like to play again? ( y / n )");
+    Console.WriteLine();
+    string? choice = Console.ReadLine();
+    if (choice != "y" && choice != "n")
+    {
+      Console.WriteLine("Invalid input option, try again.");
+      Replay();
+    }
+    if (choice == "y")
+    {
+      Main();
+    }
+    Environment.Exit(0);
   }
 }
