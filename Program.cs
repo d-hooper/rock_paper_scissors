@@ -1,10 +1,13 @@
-﻿internal class Program
+﻿using System.Text.Json;
+
+internal class Program
 {
 
   static int PlayerWins = 0;
   static int ComputerWins = 0;
   private static void Main()
   {
+    LoadGame();
     Console.Clear();
     Console.WriteLine("Rock Paper Scissors");
     Console.WriteLine();
@@ -36,6 +39,7 @@
 
     Console.WriteLine();
     Console.WriteLine($"Score Tally: You - {PlayerWins} | Computer - {ComputerWins}");
+    SaveGame(PlayerWins, ComputerWins);
     Replay();
   }
 
@@ -100,5 +104,37 @@
       Main();
     }
     Environment.Exit(0);
+  }
+
+  static void SaveGame(int playerWins, int computerWins)
+  {
+    SaveData save = new(playerWins, computerWins);
+    string saveData = JsonSerializer.Serialize(save);
+    File.WriteAllText("saveGame.json", saveData);
+  }
+
+  static void LoadGame()
+  {
+    if (!File.Exists("saveGame.json")) return;
+    string jsonString = File.ReadAllText("saveGame.json");
+    SaveData? data = JsonSerializer.Deserialize<SaveData>(jsonString);
+
+    if (data != null)
+    {
+      PlayerWins = data.PlayerWins;
+      ComputerWins = data.ComputerWins;
+    }
+  }
+}
+
+internal class SaveData
+{
+  public int PlayerWins { get; set; }
+  public int ComputerWins { get; set; }
+
+  public SaveData(int playerWins, int computerWins)
+  {
+    PlayerWins = playerWins;
+    ComputerWins = computerWins;
   }
 }
